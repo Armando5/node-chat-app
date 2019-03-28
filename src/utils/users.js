@@ -1,7 +1,7 @@
 const users = []
 
 const addUser = ({id, username, room}) => {
-    // clean the data
+    
     username = username.trim().toLowerCase()
     room = room.trim().toLowerCase()
 
@@ -38,31 +38,13 @@ const removeUser = (id) => { //get back the position of the array item
 } 
 
 const getUser = (id) => {
-    return users.find((user) => user.id === id) // shorthand syntax
+    return users.find((user) => user.id === id) 
 }
 
 const getUsersInRoom = (room) => {
     room = room.trim().toLowerCase()
-    return users.filter((user) => user.room === room) // shorthand syntax
+    return users.filter((user) => user.room === room)
 }
-
-addUser({
-    id: 223,
-    username: 'Andi',
-    room: 'Kola'
-})
-
-addUser({
-    id: 224,
-    username: 'Loku',
-    room: 'Kola'
-})
-
-addUser({
-    id: 225,
-    username: 'Andi',
-    room: 'Pepsi'
-})
 
 module.exports = {
     addUser,

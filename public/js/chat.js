@@ -1,17 +1,16 @@
-const socket = io()
+const socket = io() // connect to the server
 
 const messageForm = document.querySelector('#message-form')
-const messageFormButton = messageForm.querySelector('button')
 const messageFormInput = messageForm.querySelector('input')
-const locationButton = document.querySelector('#send-location')
+const messageFormButton = messageForm.querySelector('button')
 const messages = document.querySelector('#messages')
+const locationButton = document.querySelector('#send-location')
 
 //Templates 
-const messageTemplate = document.querySelector('#message-template').innerHTML
 const locationTemplate = document.querySelector('#location-template').innerHTML
+const messageTemplate = document.querySelector('#message-template').innerHTML
 const sidebarTemplate = document.querySelector('#sidebar-template').innerHTML
 
-//Options
 const {username, room} = Qs.parse(location.search, {ignoreQueryPrefix: true}) //ignoreQueryPrefix -> question mark goes away from parsing the data
 
     const autoscroll = () => {
@@ -32,7 +31,7 @@ socket.on('locationMessage', (message) => {
 
 socket.on('message', (message) => {
     console.log(message)
-    const html = Mustache.render(messageTemplate, { //store the html rendering in the browser
+    const html = Mustache.render(messageTemplate, {
         username: message.username,
         message: message.text,
         createdAt: moment(message.createdAt).format('h:mm a')
@@ -88,6 +87,6 @@ locationButton.addEventListener('click', () => {
 socket.emit('join', {username, room}, (error) => {
     if(error){
         alert(error) 
-        location.href = "/" // sends the clients to the root of the site
+        location.href = "/"
     }
 })
